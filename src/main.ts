@@ -4,6 +4,9 @@ import {
   app, BrowserWindow, Menu, ipcMain,
 } from 'electron';
 
+
+const open = require('open');
+
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -27,7 +30,7 @@ function createWindow() {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
@@ -42,10 +45,16 @@ function createWindow() {
       label: 'Menu',
       submenu: [
         {
-          label: 'Hello',
-          click() {
-            mainWindow.webContents.send('@apprun', '#hello', 'from Electron Main');
-          },
+          label: 'Home',
+          click: () => mainWindow.webContents.send('@apprun', '#Home'),
+        },
+        {
+          label: 'Contact',
+          click: () => mainWindow.webContents.send('@apprun', '#Contact'),
+        },
+        {
+          label: 'About',
+          click: () => mainWindow.webContents.send('@apprun', '#About'),
         },
         { type: 'separator' },
         { role: 'reload' },
@@ -81,8 +90,8 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.on('@electron', (_, ...arg) => {
-  console.log(...arg);
+ipcMain.on('@electron', (_, ...args) => {
+  if (args[0] === 'open-apprun') open('https://github.com/yysun/apprun');
 });
 
 app.allowRendererProcessReuse = true;
