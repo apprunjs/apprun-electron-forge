@@ -1,6 +1,8 @@
-import { app, BrowserWindow, Menu, ipcMain } from 'electron';
-import * as path from 'path';
-import * as url from 'url';
+/* eslint-disable no-console */
+/* eslint-disable import/no-extraneous-dependencies */
+import {
+  app, BrowserWindow, Menu, ipcMain,
+} from 'electron';
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
@@ -17,8 +19,8 @@ function createWindow() {
     height: 800,
     width: 1000,
     webPreferences: {
-      nodeIntegration: true
-    }
+      nodeIntegration: true,
+    },
   });
 
   // and load the index.html of the app.
@@ -43,16 +45,16 @@ function createWindow() {
           label: 'Hello',
           click() {
             mainWindow.webContents.send('@apprun', '#hello', 'from Electron Main');
-          }
+          },
         },
         { type: 'separator' },
         { role: 'reload' },
         { role: 'forceReload' },
         { role: 'toggleDevTools' },
         { type: 'separator' },
-        { role: 'quit' }
-      ]
-    }
+        { role: 'quit' },
+      ],
+    },
   ]);
   Menu.setApplicationMenu(menu);
 }
