@@ -1,9 +1,12 @@
-/* eslint-disable import/first */
 /* eslint-disable import/no-extraneous-dependencies */
 import './index.css';
 
 import app from 'apprun';
 import { ipcRenderer } from 'electron';
+
+import Home from './Home';
+import Contact from './Contact';
+import About from './About';
 
 app.on('@electron', (...arg) => ipcRenderer.send('@electron', ...arg));
 ipcRenderer.on('@apprun', (_, event, ...args) => app.run(event, ...args));
@@ -17,6 +20,6 @@ const view = () => <>
 
 app.start(document.body, 0, view);
 
-import './Home';
-import './Contact';
-import './About';
+new Home().start('main');
+new Contact().mount('main');
+new About().mount('main');

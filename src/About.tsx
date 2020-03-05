@@ -1,6 +1,6 @@
 import { app, Component } from 'apprun';
 
-export default class AboutComponent extends Component {
+export default class extends Component {
   state = 'About';
 
   view = state => <div>
@@ -11,5 +11,3 @@ export default class AboutComponent extends Component {
     '#About': state => state,
   };
 }
-
-new AboutComponent().mount('main');

@@ -1,6 +1,6 @@
 import { app, Component } from 'apprun';
 
-export default class HomeComponent extends Component {
+export default class extends Component {
   state = 'Home';
 
   view = state => <div>
@@ -11,5 +11,3 @@ export default class HomeComponent extends Component {
     '#Home': state => state,
   };
 }
-
-new HomeComponent().start('main');

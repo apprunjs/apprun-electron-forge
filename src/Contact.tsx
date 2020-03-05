@@ -1,6 +1,6 @@
 import app, { Component } from 'apprun';
 
-export default class ContactComponent extends Component {
+export default class extends Component {
   state = 'Contact';
 
   view = state => <div>
@@ -11,5 +11,3 @@ export default class ContactComponent extends Component {
     '#Contact': state => state,
   };
 }
-
-new ContactComponent().mount('main');
